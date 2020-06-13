@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6C89E7B4-5451-48CC-A1D9-F73CE093ABF5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ZedMed.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\ZedMedTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ZedMed">
+        <MSBuild Projects="ZedMed.dproj"/>
+    </Target>
+    <Target Name="ZedMed:Clean">
+        <MSBuild Projects="ZedMed.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ZedMed:Make">
+        <MSBuild Projects="ZedMed.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ZedMedTests">
+        <MSBuild Projects="Test\ZedMedTests.dproj"/>
+    </Target>
+    <Target Name="ZedMedTests:Clean">
+        <MSBuild Projects="Test\ZedMedTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ZedMedTests:Make">
+        <MSBuild Projects="Test\ZedMedTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ZedMed;ZedMedTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ZedMed:Clean;ZedMedTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ZedMed:Make;ZedMedTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
